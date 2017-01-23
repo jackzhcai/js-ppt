@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../lib/css/zenburn.css">
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
-        document.write('' + ( window.location.search.match(/print-pdf/gi) ? '' : '<link rel="stylesheet" href="./css/print/pdfpaper.css" type="text/css" media="print">' ) + '');
+        document.write('' + ( window.location.search.match(/print-pdf/gi) ? '' : '<link rel="stylesheet" href="./css/print/pdf.css" type="text/css" media="print"><link rel="stylesheet" href="./css/print/paper.css" type="text/css" media="print">' ) + '');
     </script>
     <!--[if lt IE 9]>
     <script src="../lib/js/html5shiv.js"></script><![endif]-->
