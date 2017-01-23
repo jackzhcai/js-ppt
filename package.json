@@ -1,0 +1,19 @@
+{
+  "name": "JS-PPT",
+  "version": "0.0.1",
+  "description": "JS-PPT TEMP",
+  "main": "index.html",
+  "scripts": {
+    "test": "http-server -a localhost -p 8090 -c-1",
+    "install": "cnpm install -d",
+    "start": "http-server -a localhost -p 8080"
+  },
+  "keywords": [
+    "ppt"
+  ],
+  "author": "Jack Cai",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.9.0"
+  }
+}

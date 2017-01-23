@@ -1,0 +1,32 @@
+
+# Logs
+*.log
+npm-debug.log*
+.idea
+.idea/
+tpl/*
+cpm-cm-tpl.zip
+cm.bilibili.com.zip
+test.cm.bilibili.com.zip
+
+# Runtime data
+*.pid
+.tmp
+tags
+build.sh
+.DS_Store
+node_modules
+dist
+src-test
+src-test.rar
+gulpfile.js
+
+##push server
+#/*
+#!/dist
+#!server.js
+#!/logs
+#!package.json
+#!process.json
+#*.log
+#*.pid

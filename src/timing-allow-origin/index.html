@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .hidden{ display: none; }
+    </style>
+</head>
+<body>
+<span id="rt-unsupported" class="hidden">API not supported</span>
+<div>
+    <img src="./images/1414977099502-1405991261resource-timing-overview.png" />
+</div>
+<div>
+    <h2>Test 1 - jQuery</h2>
+    <ul id="script-list"></ul>
+    <ul id="script-list-2"></ul>
+</div>
+<div>
+    <h2>Test 2 - Image</h2>
+    <img src="http://www.sitepoint.com/wp-content/themes/sitepoint/assets/svg/sitepoint.svg"/>
+    <ul id="img-list"></ul>
+    <ul id="img-list-2"></ul>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+//    if ( !('performance' in window) ||
+//            !('getEntriesByType' in window.performance) ||
+//            !(window.performance.getEntriesByType('resource') instanceof Array)
+//    ) {
+//        document.getElementById('rt-unsupported').classList.remove('hidden');
+//    } else {
+//        window.addEventListener('load', function() {
+//            var resources = window.performance.getEntriesByType('resource');
+//            for(var obj in resources) {
+//                var list = '';
+//                for(var properties in resources[obj]) {
+//                    list += '<li>' + properties + ': <span class="value">' + resources[obj][properties] + '</span></li>';
+//                }
+//                document.getElementById(resources[obj].initiatorType + '-list').innerHTML = list;
+//            }
+//        });
+//    }
+
+
+    if ( !('performance' in window) || !('getEntriesByType' in window.performance) || !(window.performance.getEntriesByType('resource') instanceof Array) ) {
+        document.getElementById('rt-unsupported').classList.remove('hidden');
+    } else {
+        window.addEventListener('load', function() {
+            var resources = window.performance.getEntriesByType('resource');
+            var getResourceInfo = function(resObjs){
+                var tpls = [];
+                var types  = [
+                    'initiatorType',
+                    'startTime',
+                    'redirectStart',
+                    'redirectEnd',
+                    'fetchStart',
+                    'domainLookupStart',
+                    'domainLookupEnd',
+                    'connectStart',
+                    'secureConnectionStart',
+                    'connectEnd',
+                    'requestStart',
+                    'responseStart',
+                    'responseEnd',
+                    'workerStart',
+                    'transferSize',
+                    'encodedBodySize',
+                    'decodedBodySize',
+                    'name',
+                    'entryType',
+                    'duration',
+                    'toJSON'
+                ];
+                for(var i=0,len=types.length; i<len; i++){
+                    tpls.push('<li>' + types[i] + ': <span class="value">' + resObjs[types[i]] + '</span></li>');
+                }
+                return tpls;
+            };
+            for(var obj in resources) {
+//                var list = '';
+//                for(var properties in resources[obj]) {
+//                    list += '<li>' + properties + ': <span class="value">' + resources[obj][properties] + '</span></li>';
+//                }
+//                document.getElementById(resources[obj].initiatorType + '-list').innerHTML = list;
+
+                document.getElementById(resources[obj].initiatorType + '-list-2').innerHTML = getResourceInfo(resources[obj]).join('');
+
+            }
+        });
+    }
+</script>
+</body>
+</html>
