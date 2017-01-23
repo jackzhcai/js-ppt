@@ -4,8 +4,8 @@
   "description": "JS-PPT TEMP",
   "main": "index.html",
   "scripts": {
-    "test": "http-server -a localhost -p 8090 -c-1",
     "install": "cnpm install -d",
+    "test": "http-server -a localhost -p 8090 -c-1",
     "start": "http-server -a localhost -p 8080"
   },
   "keywords": [
