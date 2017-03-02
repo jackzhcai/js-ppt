@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CORS</title>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./css/reveal.min.css">
+    <link rel="stylesheet" href="./css/theme/default.css" id="theme">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="../lib/css/zenburn.css">
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write('' + ( window.location.search.match(/print-pdf/gi) ? '' : '<link rel="stylesheet" href="./css/print/pdf.css" type="text/css" media="print"><link rel="stylesheet" href="./css/print/paper.css" type="text/css" media="print">' ) + '');
+    </script>
+    <!--[if lt IE 9]>
+    <script src="../lib/js/html5shiv.js"></script><![endif]-->
+    <base target="_blank"/>
+    <!--这么写更方便slide中插入script，此处忽略性能吧-->
+    <script src="./js/jquery-min.js"></script>
+    <script src="./js/jquery.lightbox-0.5.pack.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/jquery.lightbox-0.5.css" media="screen"/>
+    <style type="text/css">
+        a.large {
+            font-size: 140%;
+            font-weight: bold;
+        }
+
+        .img {
+            height: 200px;
+        }
+
+        .img-thumb {
+            height: 220px;
+        }
+
+        .img-long {
+            height: 600px;
+        }
+
+        .img-fat {
+            width: 400px;
+        }
+
+        .left {
+            float: left;
+            margin-right: 20px;
+        }
+
+        .right {
+            float: left;
+            /*margin-left: 200px;*/
+            padding: 20px 0 0 40px;
+        }
+        .lightbox-wrapper li{
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-markdown>
+            ## CORS简介
+            <br><br>
+            #### Jack Cai
+            <br>
+        </section>
+        <section data-markdown>
+            ### 什么是CORS<br /><br />
+            <ul class="lightbox-wrapper">
+                <li class="fragment" style="list-style: none; text-align: center;">CORS是一个W3C标准，全称是"跨域资源共享"（Cross-origin resource sharing）</li>
+            </ul>
+        </section>
+        <section data-markdown>
+            ### 优点<br /><br />
+            <ul class="lightbox-wrapper">
+                <li class="fragment">允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制</li>
+                <li class="fragment">CORS通信与同源的AJAX通信没有差别，代码完全一样</li>
+            </ul>
+        </section>
+        <section data-markdown>
+            ### 缺点<br /><br />
+            <ul class="lightbox-wrapper">
+                <li class="fragment">需要浏览器和服务器同时支持</li>
+                <li class="fragment">IE浏览器不能低于IE10</li>
+            </ul>
+        </section>
+        <section data-markdown>
+            ### 跨源共享实现<br /><br />
+            <ul class="lightbox-wrapper">
+                <li class="fragment">所有的跨站请求都是通过 XMLHttpRequest 对象发起</li>
+                <li class="fragment">简单请求和非简单请求</li>
+            </ul>
+        </section>
+        <section data-markdown>
+            ### 简单请求
+            <ul class="lightbox-wrapper">
+                <li class="fragment">只使用 GET, HEAD 或者 POST 请求方法</li>
+                <li class="fragment">HTTP的头信息只包含几种字段，Accept、Accept-Language、Content-Language和Content-Type（只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain）</li>
+            </ul>
+        </section>
+        <!--<section data-markdown>
+            <div class="lightbox-wrapper">
+                <a href="javascript: void(0);"><img src="./images/showdemo.jpeg"></a>
+            </div>
+        </section>-->
+        <section data-markdown>
+            ### 基本流程
+            <div class="lightbox-wrapper">
+                <img src="./images/cors-7.png">
+            </div>
+            <!--<div class="lightbox-wrapper">
+                <img src="./images/cors-1.png">
+            </div>
+            <div class="lightbox-wrapper">
+                <img src="./images/cors-2.png">
+            </div>-->
+        </section>
+        <section data-markdown>
+            <div class="lightbox-wrapper">
+                <img src="./images/cors-8.png">
+            </div>
+        </section>
+        <section data-markdown>
+            ### 相关字段
+            <ul class="lightbox-wrapper">
+                <li class="fragment">请求</li>
+                <li class="fragment">withCredentials</li>
+                <li class="fragment">响应</li>
+                <li class="fragment">Access-Control-Allow-Origin</li>
+                <li class="fragment">Access-Control-Allow-Credentials</li>
+                <li class="fragment">Access-Control-Expose-Headers</li>
+            </ul>
+        </section>
+        <section data-markdown>
+            ### 非简单请求
+            <p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json</p>
+        </section>
+        <section data-markdown>
+            ### 预检请求
+            <ul class="lightbox-wrapper">
+                <li class="fragment"><p>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求</p></li>
+                <li class="fragment"><p>浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段</p></li>
+            </ul>
+        </section>
+        <section data-markdown>
+            ### 基本流程
+            <div class="lightbox-wrapper">
+                <img style="width: 650px;" src="./images/cors-9.png">
+            </div>
+        </section>
+        <section data-markdown>
+            <div class="lightbox-wrapper">
+                <img style="width: 800px;" src="./images/cors-10.png">
+            </div>
+            <!--### 基本流程
+            <p>一旦服务器通过了"预检"请求，以后每次浏览器正常的CORS请求，就都跟简单请求一样，会有一个Origin头信息字段。</p>
+            <div class="lightbox-wrapper">
+                <img src="./images/cors-5.png">
+            </div>
+            <div class="lightbox-wrapper">
+                <img src="./images/cors-6.png">
+            </div>-->
+        </section>
+        <section data-markdown>
+            <div class="lightbox-wrapper">
+                <img style="width: 800px;" src="./images/cors-11.png">
+            </div>
+        </section>
+        <section data-markdown>
+            ### 带cookie的请求
+            <div class="lightbox-wrapper">
+                <img style="width: 800px;" src="./images/cors-12.png">
+            </div>
+        </section>
+        <section data-markdown>
+            ### CORS请求相关字段
+            <ul class="lightbox-wrapper">
+                <li class="fragment">请求</li>
+                <li class="fragment">Access-Control-Request-Method</li>
+                <li class="fragment">Access-Control-Request-Headers</li>
+                <li class="fragment">响应</li>
+                <li class="fragment">Access-Control-Allow-Methods</li>
+                <li class="fragment">Access-Control-Allow-Headers</li>
+                <li class="fragment">Access-Control-Allow-Credentials</li>
+                <li class="fragment">Access-Control-Max-Age</li>
+            </ul>
+        </section>
+        <section data-markdown>
+            <div class="lightbox-wrapper">
+                <a href="javascript: void(0);"><img src="./images/showdemo.jpeg"></a>
+            </div>
+        </section>
+        <section data-markdown>
+            ### 相关资料
+            #### <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS</a>
+        </section>
+        <section data-markdown>
+            ### Thanks
+        </section>
+    </div>
+</div>
+<script src="../lib/js/head.min.js"></script>
+<script src="./js/reveal.min.js"></script>
+<script src="./js/index.js"></script>
+</body>
+</html>
